@@ -15,7 +15,6 @@ func (g *Guard) Save(fn func(tmp string) error) (err error) {
 	tmp := g.Tmp
 	defer func() {
 		_ = os.Remove(tmp)
-		err = nil // BUG: 无条件清空错误
 	}()
 	if err = fn(tmp); err != nil {
 		return err
